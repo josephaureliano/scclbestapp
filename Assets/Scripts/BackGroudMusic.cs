@@ -39,6 +39,9 @@ public class BackGroudMusic : MonoBehaviour {
             case "NewPinZiGame":
                 PlaySceneBGM(1);
                 break;
+            case "maze":
+                PlaySceneBGM(2);
+                break;
         }
     }
 

@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+/*
+ * This script:
+ * Generates 25 tiles for the game
+ * Generates turning points or "nodes" so that the player gets a randomised path each time he/she plays
+ * Generates the starting and ending bridges at fixed points. If changes to length of sentence(currently 12) are made, the positions of the bridges and the number of nodes may have to change
+ * Currently, the tiles are "Destroy() ed" after each round. We recognise this is undesirable due to large memory used. Due to time constraint, we have yet to implement an object pool. It would greatly optimise the game and speed it up. 
+ * 
+ */
 public class MazeDisplayController : MonoBehaviour {
     private int length = 12;
     private List<GameObject> spaces;
@@ -260,11 +269,21 @@ public class MazeDisplayController : MonoBehaviour {
 	public IEnumerator RevealAnswer(){
 		foreach (GameObject go in spaces) {
 			if (go.GetComponent<MazeTileController> ().serialNumber == 0) {
+                go.GetComponentInChildren<TextMesh>().text = "";
 				go.GetComponentInChildren<Rigidbody> ().useGravity = true;
-				go.SetActive (false);
+                yield return new WaitForSeconds(0.05f);
+				
 			}
 
 		}
-		yield return new WaitForSeconds (3f);
+        yield return new WaitForSeconds(1f);
+
+        foreach (GameObject go in spaces)
+        {
+            if(go.GetComponent<MazeTileController>().serialNumber == 0)
+            {
+                go.SetActive(false);
+            }
+        }
 	}
 }

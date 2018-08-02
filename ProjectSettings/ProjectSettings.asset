@@ -243,8 +243,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Pan/Desktop/NewAPP/XmasAndHisHouse/Keystore/user.keystore
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: D:/resources/CCA/App/XmasAndHisHouse/XmasAndHisHouse/user.keystore
+  AndroidKeyaliasName: sccl best app
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   AndroidEnableTango: 0
@@ -267,7 +267,7 @@ PlayerSettings:
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: AndroidPlayer
-    m_APIs: 0b00000015000000
+    m_APIs: 0800000015000000
     m_Automatic: 1
   m_BuildTargetVRSettings: []
   m_BuildTargetEnableVuforiaSettings: []

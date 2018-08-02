@@ -54,7 +54,7 @@ public class DataController : MonoBehaviour {
 		if (playerDataController) {
 			Debug.Log ("playerDataController is found successfully");
 
-			playerDataController.UpdatePlayerCoins (10);
+			playerDataController.UpdatePlayerCoins (2);
 		}
 		
 	}

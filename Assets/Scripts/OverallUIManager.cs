@@ -151,5 +151,13 @@ public class OverallUIManager : MonoBehaviour {
 		coinTxt.text = playerDataController.GetPlayerData ().coins.ToString ();
 	}
 		
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
 
+    public void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
+    }
 }

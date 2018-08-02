@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/*
+ * This script:
+ * Controls the start and end of the game
+ * When a round ends, corresponding UIs will be activated or deactivated. Sounds will be played, and a repeat option will be displayed.
+ */
+
 public class OverallGameManager : MonoBehaviour {
     private List<string> corSentence = new List<string>();
     private List<string> randSentence = new List<string>();
@@ -54,16 +61,18 @@ public class OverallGameManager : MonoBehaviour {
         Debug.Log("-------------"+"The game is won: " + win);
 		if (win) {
 			StartCoroutine(displayController.RevealAnswer ());
+            Debug.Log("Coroutine ended");
 			StartPage.SetActive (false);
 			WinPage.SetActive (true);
 			LostPage.SetActive (false);
 			//WinPage.GetComponentInChildren<Text> ().text = "";
 			string temp = "";
+            StartCoroutine(dataController.Pronounce());
 			foreach(string s in displayController.corSentence) {
 				temp += s;
 				Debug.Log (s);
 			}
-			WinPage.GetComponentsInChildren<Text> ()[1].text = temp;
+			WinPage.GetComponentsInChildren<Text> ()[0].text = temp;
 			Debug.Log (temp);
 			Debug.Log (WinPage.GetComponentInChildren<Text> ().text);
 

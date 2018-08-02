@@ -32,12 +32,12 @@ public class DirectedAgent : MonoBehaviour {
         Vector3 dir = targetLocation - mas.transform.position;
         Quaternion turn = Quaternion.LookRotation(dir);
        
-        for (int i = 8; i > 0; i--)
+        for (int i = 20; i > 0; i--)
         {
             Vector3 rotation = Quaternion.Slerp(mas.transform.rotation, turn, Time.deltaTime).eulerAngles;
-            mas.transform.rotation = Quaternion.Euler(0f, rotation.y*Time.deltaTime/8, 0f);
+            mas.transform.rotation = Quaternion.Euler(0f, rotation.y*Time.deltaTime/10, 0f);
             mas.transform.Rotate(0f, rotation.y, 0f);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.002f);
         }
         agent.SetDestination(targetLocation);
         //xmasAnimation.SetMovingState(1);

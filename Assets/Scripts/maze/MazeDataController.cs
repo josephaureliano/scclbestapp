@@ -4,6 +4,13 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 
+/*
+ * This script:
+ * Reads the sentences from the file CharSpawnerUTF from the path mentioned below in the code.
+ * Randomly picks one sentence and stores it as a correct sentence within this instance of MazeDataController, which is used by MazeDisplayController.
+ * Updates player data and plays pronunciation
+ * Currently, for easier testing, the sentences are set to 12 characters inclusive of punctuations. Further amendments can be made at MazeDisplayController to change length and positions of starting bridges
+ */
 public class MazeDataController : MonoBehaviour {
     public int length = 12;
     private string[] sentences;
@@ -12,12 +19,15 @@ public class MazeDataController : MonoBehaviour {
     public List<string> randSentence = new List<string>();
    // private PlayerDataController playerData = new PlayerDataController();
 	private PlayerDataController playerData;
+    private AudioClip pronunciation;
+    private AudioController ac;
 	// Use this for initialization
 	public void Start () {
 		GameObject playerDatagO = GameObject.FindGameObjectWithTag ("Persistent");
 		if(playerDatagO != null)
 			playerData = playerDatagO.GetComponent<PlayerDataController> ();
-		//StartNewRound ();
+        //StartNewRound ();
+        ac = GetComponent<AudioController>();
     }
 
 	public void StartNewRound(){
@@ -61,6 +71,7 @@ public class MazeDataController : MonoBehaviour {
     {
         List<string> characters = new List<string>();
         int index = Random.Range(0, 50);
+        pronunciation = Resources.Load<AudioClip>("Maze/" + index.ToString());
         for (int i = 0; i < sentences[index].Length; i++)
         {
             string indiChar = sentences[index].Substring(i, 1);
@@ -95,5 +106,11 @@ public class MazeDataController : MonoBehaviour {
     public void RoundEnd(bool win)
     {
         UpdatePlayerData(win);
+    }
+
+    public IEnumerator Pronounce()
+    {
+        yield return new WaitForSeconds(3.5f);
+        ac.PlayPronunciation(pronunciation);
     }
 }
